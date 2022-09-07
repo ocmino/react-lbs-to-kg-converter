@@ -25,8 +25,6 @@ const InputFormControl = styled.div`
     margin-bottom: 10px;
     text-align: center;
   }
-
-
 `;
 
 const Error = styled.div`
@@ -69,6 +67,15 @@ const InputForm = () => {
     border: error ? "1px solid red" : "1px solid #ccc",
   };
 
+  const clearInput = () => {
+    setWeight("");
+  };
+
+  const handleSubmit = () => {
+    handleClick();
+    clearInput();
+  };
+
   return (
     <InputFormControl>
       <input
@@ -78,7 +85,7 @@ const InputForm = () => {
         onChange={handleChange}
         style={inputStyle}
       />
-        <Button onClick={handleClick}>Convert</Button>
+      <Button onClick={handleSubmit}>Convert</Button>
       {error && <Error>Please enter a weight</Error>}
     </InputFormControl>
   );
