@@ -11,10 +11,6 @@ function App() {
       <Card className="card">
         <Title>LBS to KG</Title>
         <InputForm />
-        <div className="output-content">
-          <div className="output"></div>
-        </div>
-        <Footer />
       </Card>
     </div>
   );

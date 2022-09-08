@@ -1,93 +1,38 @@
-//create input form with "enter weight" and "convert" button
+//create input form with "enter weight" and "convert" button and display the output with the output component
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "./UI/Button";
-
-const InputFormControl = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-
-  input {
-    width: 200px;
-    height: 30px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-`;
-
-const Error = styled.div`
-  color: red;
-  font-size: 0.8em;
-  margin-top: 10px;
-
-  animation: bounce 0.5s;
-  @keyframes bounce {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-`;
+import Converter from "./Output";
 
 const InputForm = () => {
-  const [weight, setWeight] = React.useState("");
-  const [error, setError] = React.useState(false);
+  const [weight, setWeight] = useState("");
 
-  const handleChange = (e) => {
-    setWeight(e.target.value);
+  const handleWeight = (weight) => {
+    setWeight(weight);
   };
 
-  const handleClick = () => {
-    if (weight === "") {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  };
+  //style inputcontainer
+  const InputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  `;
+  //create inputtext
+  const InputText = styled.div`
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  `;
 
-  const inputStyle = {
-    backgroundColor: error ? "salmon" : "white",
-    border: error ? "1px solid red" : "1px solid #ccc",
-  };
-
-  const clearInput = () => {
-    setWeight("");
-  };
-
-  const handleSubmit = () => {
-    handleClick();
-    clearInput();
-  };
-
+  //return calculated weight on button click
   return (
-    <InputFormControl>
-      <input
-        type="number"
-        placeholder="Enter weight"
-        value={weight}
-        onChange={handleChange}
-        style={inputStyle}
-      />
-      <Button onClick={handleSubmit}>Convert</Button>
-      {error && <Error>Please enter a weight</Error>}
-    </InputFormControl>
+    <InputContainer>
+      <InputText>Enter Weight</InputText>
+      <Converter weight={weight} />
+    </InputContainer>
   );
 };
 
